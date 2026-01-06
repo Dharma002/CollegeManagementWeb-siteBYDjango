@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Faculty{% endblock %}
+
+{% block body %}
+
+<section class="bg-primary text-white py-5 rounded-3 shadow-sm">
+  <div class="container text-center">
+    <h1 class="fw-bold">Our Faculty</h1>
+    <p class="lead">Experienced & Dedicated Teachers</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      {% for t in teachers %}
+      <div class="col-md-4">
+        <div class="card shadow h-100 text-center">
+
+          {% if t.photo %}
+          <img src="{{ t.photo.url }}" class="card-img-top" style="height:260px; object-fit:cover;">
+          {% else %}
+          <img src="{% static 'images/teacher.jpg' %}" class="card-img-top">
+          {% endif %}
+
+          <div class="card-body">
+            <h5 class="fw-bold">{{ t.name }}</h5>
+            <p class="text-primary fw-semibold">{{ t.subject }}</p>
+
+            <p class="mb-1"><strong>Dept:</strong> {{ t.department }}</p>
+            <p class="mb-1"><strong>Qualification:</strong> {{ t.qualification }}</p>
+            <p><strong>Experience:</strong> {{ t.experience }}</p>
+          </div>
+
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-center text-muted">No faculty added yet.</p>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

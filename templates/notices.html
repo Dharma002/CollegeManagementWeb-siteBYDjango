@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}Notice Board{% endblock %}
+
+{% block body %}
+
+<section class="bg-warning text-dark py-5 rounded shadow-sm">
+  <div class="container text-center">
+    <h1 class="fw-bold">Notice Board</h1>
+    <p class="lead mb-0">Latest updates & announcements</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+
+    {% if notices %}
+      <div class="row g-4">
+        {% for notice in notices %}
+        <div class="col-md-6">
+          <div class="card shadow-sm h-100 {% if notice.is_important %}border-danger{% endif %}">
+            <div class="card-body">
+              <h5 class="fw-bold">
+                {{ notice.title }}
+                {% if notice.is_important %}
+                  <span class="badge bg-danger ms-2">Important</span>
+                {% endif %}
+              </h5>
+
+              <p class="text-muted small">
+                {{ notice.created_at|date:"d M Y" }}
+              </p>
+
+              <p>{{ notice.description }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center text-muted">No notices available.</p>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}

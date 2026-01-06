@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Arts Department{% endblock %}
+
+{% block body %}
+
+<!-- HEADER -->
+<section class="bg-primary text-white py-5">
+  <div class="container text-center">
+    <h1 class="fw-bold">Arts Department</h1>
+    <p class="lead">Humanities & Social Sciences</p>
+  </div>
+</section>
+
+<!-- CONTENT -->
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3">About Arts Department</h2>
+        <p class="text-muted">
+          The Arts Department focuses on humanities and social sciences,
+          helping students develop critical thinking, communication skills
+          and a deep understanding of society.
+        </p>
+
+        <p class="text-muted">
+          Subjects include History, Political Science, Geography,
+          Economics and Sociology.
+        </p>
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">✔ Classes: 6 – 12</li>
+          <li class="list-group-item">✔ Experienced Faculty</li>
+          <li class="list-group-item">✔ Board Exam Preparation</li>
+        </ul>
+      </div>
+
+      <div class="col-md-6 text-center">
+        <img src="{% static 'images/arts.jpg' %}"
+             class="img-fluid rounded shadow"
+             alt="Arts Department">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h3 class="text-center fw-bold mb-4">Why Choose Arts?</h3>
+
+    <div class="row g-4 text-center">
+
+      <div class="col-md-4">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <h5 class="fw-bold">Strong Foundation</h5>
+            <p class="text-muted">Develops analytical & writing skills</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <h5 class="fw-bold">Career Options</h5>
+            <p class="text-muted">UPSC, Law, Teaching & Social Services</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <h5 class="fw-bold">Guidance</h5>
+            <p class="text-muted">Personal mentoring & exam guidance</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="bg-dark text-white text-center py-5">
+  <h2 class="fw-bold">Interested in Arts?</h2>
+  <p class="lead">Build a strong academic and career foundation</p>
+  <a href="{% url 'admission' %}" class="btn btn-warning btn-lg">
+    Apply for Admission
+  </a>
+</section>
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}Student Result{% endblock %}
+
+{% block body %}
+
+<section class="bg-dark text-white py-5 rounded shadow-sm">
+  <div class="container text-center">
+    <h1 class="fw-bold">Student Result Portal</h1>
+    <p class="lead">Enter Roll Number to View Result</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+
+    <form method="POST" class="row justify-content-center mb-4">
+      {% csrf_token %}
+      <div class="col-md-4">
+        <input type="text" name="roll_no"
+               class="form-control form-control-lg"
+               placeholder="Enter Roll Number" required>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-warning btn-lg w-100">Search</button>
+      </div>
+    </form>
+
+    {% if student %}
+    <div class="card shadow">
+      <div class="card-body">
+        <h5 class="fw-bold">{{ student.name }}</h5>
+        <p class="mb-1">Roll No: {{ student.roll_no }}</p>
+        <p>Class: {{ student.student_class }} | Department: {{ student.department }}</p>
+
+        <table class="table table-bordered mt-3">
+          <thead class="table-dark">
+            <tr>
+              <th>Subject</th>
+              <th>Marks</th>
+              <th>Max</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for r in results %}
+            <tr>
+              <td>{{ r.subject }}</td>
+              <td>{{ r.marks }}</td>
+              <td>{{ r.max_marks }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}

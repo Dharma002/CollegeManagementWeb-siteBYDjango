@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<!-- HERO SECTION -->
+<section class="bg-dark text-white py-5">
+  <div class="container">
+    <div class="row align-items-center">
+      
+      <div class="col-md-6">
+        <h1 class="fw-bold display-5">
+          Welcome to <span class="text-warning">S P I C</span> College
+        </h1>
+        <p class="lead mt-3">
+          Quality Education for Class 6–12<br>
+          Arts • Biology • Maths • Agriculture
+        </p>
+        <a href="{% url 'admission' %}" class="btn btn-warning btn-lg mt-3">
+          Apply for Admission
+        </a>
+      </div>
+
+      <div class="col-md-6 text-center">
+        <img src="{% static 'images/college.jpg' %}" 
+             class="img-fluid rounded shadow"
+             alt="College Image">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SHORT -->
+<section class="py-5 bg-light">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3">About Our College</h2>
+    <p class="text-muted mx-auto" style="max-width: 800px;">
+      S P I C College is committed to providing high-quality education
+      from Class 6 to 12 with experienced faculty and modern teaching methods.
+    </p>
+  </div>
+</section>
+
+<!-- DEPARTMENTS -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">Our Departments</h2>
+
+    <div class="row g-4">
+
+      <div class="col-md-3">
+        <div class="card h-100 shadow text-center">
+          <div class="card-body">
+            <h5 class="fw-bold">Arts</h5>
+            <p class="text-muted">Humanities & Social Sciences</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card h-100 shadow text-center">
+          <div class="card-body">
+            <h5 class="fw-bold">Biology</h5>
+            <p class="text-muted">Life Sciences & Medical Base</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card h-100 shadow text-center">
+          <div class="card-body">
+            <h5 class="fw-bold">Maths</h5>
+            <p class="text-muted">Pure & Applied Mathematics</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card h-100 shadow text-center">
+          <div class="card-body">
+            <h5 class="fw-bold">Agriculture</h5>
+            <p class="text-muted">Modern Farming & Science</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">Why Choose Us?</h2>
+
+    <div class="row text-center g-4">
+
+      <div class="col-md-4">
+        <div class="p-4 bg-white shadow rounded">
+          <h5 class="fw-bold">Experienced Faculty</h5>
+          <p class="text-muted">Highly qualified and supportive teachers</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 bg-white shadow rounded">
+          <h5 class="fw-bold">Modern Education</h5>
+          <p class="text-muted">Updated curriculum & digital learning</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="p-4 bg-white shadow rounded">
+          <h5 class="fw-bold">Student Focus</h5>
+          <p class="text-muted">Personal attention & growth oriented</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="bg-primary text-white text-center py-5">
+  <h2 class="fw-bold">Admissions Open for 2026</h2>
+  <p class="lead">Give your child the best future</p>
+  <a href="{% url 'admission' %}" class="btn btn-light btn-lg mt-2">
+    Apply Now
+  </a>
+</section>
+
+{% endblock %}

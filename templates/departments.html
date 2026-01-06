@@ -1,0 +1,21 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Arts Department{% endblock %}
+
+{% block body %}
+<section class="py-5">
+  <div class="container text-center">
+    <h1 class="fw-bold">Arts Department</h1>
+    <p class="lead mt-3">Humanities and social sciences for Classes 6-12.</p>
+
+    <a href="{% url 'arts' %}" class="btn btn-primary">Arts</a>
+    <a href="{% url 'biology' %}" class="btn btn-success">Biology</a>
+    <a href="{% url 'maths' %}" class="btn btn-warning">Maths</a>
+    <a href="{% url 'agriculture' %}" class="btn btn-info">Agriculture</a>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admission{% endblock %}
+
+{% block body %}
+
+<!-- HERO SECTION -->
+<section class="bg-primary text-white py-5 rounded-3 shadow-sm">
+  <div class="container text-center">
+    <h1 class="fw-bold">Admission Open</h1>
+    <p class="lead mb-0">Session 2026–27 | Classes 6 to 12</p>
+  </div>
+</section>
+
+<!-- ADMISSION INFO -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+
+      <!-- LEFT CONTENT -->
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3">Why Choose S P I C College?</h2>
+        <p class="text-muted">
+          S P I C College provides quality education with experienced
+          faculty, modern teaching methods and a strong academic foundation
+          for students from class 6 to 12.
+        </p>
+
+        <ul class="list-group list-group-flush mb-3">
+          <li class="list-group-item">✔ Arts, Biology, Maths & Agriculture</li>
+          <li class="list-group-item">✔ Board & Competitive Exam Focus</li>
+          <li class="list-group-item">✔ Individual Student Attention</li>
+          <li class="list-group-item">✔ Safe & Disciplined Environment</li>
+        </ul>
+
+        <p class="fw-semibold text-success">
+          📌 Admissions are open for a limited number of seats.
+        </p>
+      </div>
+
+      <!-- RIGHT IMAGE -->
+      <div class="col-md-6 text-center">
+        <img src="{% static 'images/AD.jpg' %}"
+             class="img-fluid rounded shadow"
+             alt="Admission">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ADMISSION FORM -->
+<section class="bg-light py-5 rounded-3">
+  <div class="container">
+    <h3 class="fw-bold text-center mb-4">Admission Enquiry Form</h3>
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form method="POST" class="card shadow p-4">
+         {% csrf_token %}
+
+  <div class="row g-3">
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Student Name</label>
+      <input type="text" name="name" class="form-control" placeholder="Enter full name" required>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Class Applying For</label>
+      <select name="student_class" class="form-select" required>
+        <option value="">Select Class</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Department</label>
+      <select name="department" class="form-select" required>
+        <option value="">Select Department</option>
+        <option>Arts</option>
+        <option>Biology</option>
+        <option>Maths</option>
+        <option>Agriculture</option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label class="form-label fw-semibold">Mobile Number</label>
+      <input type="tel" name="mobile" class="form-control" placeholder="Enter mobile number" required>
+    </div>
+
+    <div class="col-12">
+      <label class="form-label fw-semibold">Address</label>
+      <textarea name="address" class="form-control" rows="3" placeholder="Enter address"></textarea>
+    </div>
+
+  </div>
+
+  <div class="text-center mt-4">
+    <button type="submit" class="btn btn-warning btn-lg px-5">
+      Submit Enquiry
+    </button>
+  </div>
+</form>
+
+
+       
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT INFO -->
+<section class="py-5 text-center">
+  <div class="container">
+    <h3 class="fw-bold mb-3">Need Help?</h3>
+    <p class="text-muted mb-1">📞 Phone: +91 98765 43210</p>
+    <p class="text-muted mb-3">📧 Email: spiccollege@gmail.com</p>
+    
+    <p class="fw-semibold text-primary">
+      Visit our campus for more details
+    </p>
+  </div>
+</section>
+
+{% endblock body %}

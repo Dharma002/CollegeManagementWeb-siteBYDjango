@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0">
+                <!-- Header with Welcome -->
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="mb-1">Welcome, {{ request.user.username }}</h3>
+                    <small class="text-light">Student Dashboard</small>
+                </div>
+
+                <div class="card-body text-center">
+                    <!-- Profile Photo Placeholder -->
+                    <img src="{% static 'images/DP.jpg' %}" 
+                         alt="Profile Photo" 
+                         class="rounded-circle mb-3" 
+                         width="120" height="120">
+
+                    <!-- Profile Details -->
+                    <h5 class="fw-semibold mb-3">Your Profile Details</h5>
+                    <ul class="list-group list-group-flush mb-4 text-start">
+                        <li class="list-group-item">
+                            <strong>Roll Number:</strong> {{ profile.roll_no }}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Class:</strong> 
+                            <span class="badge bg-info text-dark">{{ profile.student_class }}</span>
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Department:</strong> 
+                            {% if profile.department == 'arts' %}
+                                <span class="badge bg-warning text-dark">Arts</span>
+                            {% elif profile.department == 'biology' %}
+                                <span class="badge bg-success">Biology</span>
+                            {% elif profile.department == 'maths' %}
+                                <span class="badge bg-primary">Maths</span>
+                            {% elif profile.department == 'agriculture' %}
+                                <span class="badge bg-secondary">Agriculture</span>
+                            {% endif %}
+                        </li>
+                    </ul>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'student_result' %}" class="btn btn-success w-50 me-2">
+                            <i class="bi bi-bar-chart-line-fill"></i> View Result
+                        </a>
+                        <a href="{% url 'student_logout' %}" class="btn btn-danger w-50 ms-2">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

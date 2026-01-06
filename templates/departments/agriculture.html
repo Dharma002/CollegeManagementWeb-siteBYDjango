@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Agriculture Department{% endblock %}
+
+{% block body %}
+
+<!-- HERO SECTION -->
+<section class="bg-info text-white py-5 rounded-3 shadow-sm">
+  <div class="container text-center">
+    <h1 class="fw-bold">Agriculture Department</h1>
+    <p class="lead mb-0">Farming • Soil • Sustainable Agriculture</p>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section class="py-5">
+  <div class="container">
+    <div class="row align-items-center g-4">
+
+      <!-- TEXT -->
+      <div class="col-md-6">
+        <h2 class="fw-bold mb-3">About Agriculture Department</h2>
+        <p class="text-muted">
+          The Agriculture Department provides practical and theoretical
+          knowledge about farming, soil science, crop production and
+          sustainable agricultural practices.
+        </p>
+
+        <p class="text-muted">
+          It prepares students for careers in agriculture, agri-business,
+          research and modern farming technologies.
+        </p>
+
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">✔ Classes: 6 – 12</li>
+          <li class="list-group-item">✔ Practical Field Training</li>
+          <li class="list-group-item">✔ Modern Farming Techniques</li>
+          <li class="list-group-item">✔ Experienced Faculty</li>
+        </ul>
+      </div>
+
+      <!-- IMAGE -->
+      <div class="col-md-6 text-center">
+        <img src="{% static 'images/AG.jpg' %}"
+             class="img-fluid rounded shadow"
+             alt="Agriculture Department">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AREAS OF STUDY -->
+<section class="bg-light py-5 rounded-3">
+  <div class="container">
+    <h3 class="fw-bold text-center mb-4">Areas of Study</h3>
+
+    <div class="row g-4 text-center">
+
+      <div class="col-md-4">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <h5 class="fw-bold">Crop Production</h5>
+            <p class="text-muted mb-0">Cultivation & yield improvement</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <h5 class="fw-bold">Soil Science</h5>
+            <p class="text-muted mb-0">Soil health & nutrient management</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <h5 class="fw-bold">Agri Technology</h5>
+            <p class="text-muted mb-0">Modern tools & techniques</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE AGRICULTURE -->
+<section class="py-5">
+  <div class="container">
+    <h3 class="fw-bold text-center mb-4">Why Choose Agriculture?</h3>
+
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow text-center">
+          <div class="card-body">
+            <h5 class="fw-bold">Career Opportunities</h5>
+            <p class="text-muted">Farming, Research, Agri-Business</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow text-center">
+          <div class="card-body">
+            <h5 class="fw-bold">Practical Learning</h5>
+            <p class="text-muted">Field work & real-world experience</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow text-center">
+          <div class="card-body">
+            <h5 class="fw-bold">Sustainability</h5>
+            <p class="text-muted">Eco-friendly farming practices</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="bg-dark text-white text-center py-5 rounded-3">
+  <h2 class="fw-bold">Interested in Agriculture?</h2>
+  <p class="lead">Learn modern & sustainable farming techniques</p>
+  <a href="{% url 'admission' %}" class="btn btn-warning btn-lg">
+    Apply for Admission
+  </a>
+</section>
+
+{% endblock %}
