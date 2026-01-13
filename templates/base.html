@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}S P I C Collage {% endblock title %} </title>
+    <title>{% block title %}S P I C College {% endblock title %} </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -15,7 +15,7 @@
   <div class="container">
     <a class="navbar-brand fw-bold fs-3" href="{% url 'home' %}">
   <span class="text-warning">S P I C</span>
-  <span class="text-primary">Collage</span>
+  <span class="text-primary">College</span>
 </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -32,7 +32,7 @@
           <a class="nav-link dropdown-toggle text-white  me-4" href="{% url 'departments' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Departments
           </a>
-          <ul class="dropdown-menu shadow ronunded-3 p-2">
+          <ul class="dropdown-menu shadow  rounded-3 p-2">
             <li><a class="dropdown-item d-flex align-items-center gap-2" href="{% url 'arts' %}">Arts</a></li>
             <li><a class="dropdown-item d-flex align-items-center gap-2" href="{% url 'biology' %}">Biology</a></li>
             <li><hr class="dropdown-divider"></li>
