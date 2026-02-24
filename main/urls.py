@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.http import HttpResponse
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -22,6 +23,7 @@ urlpatterns = [
     path('student/register/', views.student_register, name='student_register'),
     path('student/complete-profile/', views.complete_profile, name='complete_profile'),
     path('ai-assistant/', views.ai_assistant, name='ai_assistant'),
+    path('robots.txt', lambda r: HttpResponse("User-agent: *\nDisallow: /admin/", content_type="text/plain")),
     
 
 
