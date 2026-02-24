@@ -19,7 +19,10 @@ urlpatterns = [
     path('student/login/', views.student_login, name='student_login'),
     path('student/logout/', views.student_logout, name='student_logout'),
     path('student/dashboard/', views.student_dashboard, name='student_dashboard'),
+    path('student/register/', views.student_register, name='student_register'),
     path('student/complete-profile/', views.complete_profile, name='complete_profile'),
+    path('ai-assistant/', views.ai_assistant, name='ai_assistant'),
+    
 
 
 ]

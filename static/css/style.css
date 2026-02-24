@@ -1,15 +1,248 @@
+/* --- Navigation Bar Styles --- */
+
+/* Logo ke text (SPIC) ke beech mein 1px ki gap dene ke liye */
 .navbar-brand span {
   letter-spacing: 1px;
 }
 
+/* Jab mouse Menu links (Home, About etc.) par jaye, to uska rang Yellow (#ffc107) ho jaye */
+/* !important isliye lagaya hai taaki Bootstrap ka default white color hat sake */
 .navbar-nav .nav-link:hover {
   color: #ffc107 !important;
 }
 
-/*Home page*/
+/* Navbar ke logo image par smooth transition effect */
+.navbar-brand img {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Logo hover effect: Mouse le jane par logo 5 degree ghumega aur thoda bada (scale) hoga */
+.navbar-brand:hover img {
+  transform: rotate(5deg) scale(1.1);
+}
+
+
+/* --- Home Page Card Styles --- */
+
+/* Content cards par hover karne se wo 8px upar uthenge (floating effect) */
 .card:hover {
   transform: translateY(-8px);
   transition: 0.3s;
 }
 
- 
+
+/* --- Global Settings --- */
+
+/* Poore page ki default extra margin aur padding hatane ke liye */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* --- Hero / Slideshow Section (Background) --- */
+
+/* Main banner area: Iski height screen ki puri height (100vh) ke barabar hogi */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden; /* Taaki zooming image bahar na nikle */
+}
+
+/* Slideshow container jo pure background ko cover karega */
+.slideshow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1; /* Sabse peeche rahega */
+}
+
+/* Single slide image: Default mein ye chhupi rahegi (opacity: 0) */
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Image ko stretch hone se bachata hai */
+  opacity: 0;
+  transform: scale(1.1); /* Shuruat mein thoda zoom rahegi */
+  transition: opacity 2s ease-in-out, transform 6s ease-in-out; /* Smooth fade aur zoom out effect */
+}
+
+/* Jo slide 'active' hogi, wo dikhegi aur zoom out (scale 1) hogi */
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Background image ke upar halka kaala parda (Overlay) taaki text saaf dikhe */
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 2; /* Image ke upar aur text ke peeche */
+}
+
+/* Hero section ka main text content */
+.hero-content {
+  position: relative;
+  z-index: 3; /* Sabse upar dikhane ke liye */
+}
+
+
+
+/* Ye pure box ko screen ke beech mein rakhega */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+}
+
+/* Box ki width aur shadow */
+.auth-card {
+    width: 100%;
+    max-width: 350px; /* Perfect Compact Size */
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+
+/* Patli Blue Patti Header */
+.auth-header {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    padding: 12px;
+    text-align: center;
+    color: white;
+}
+
+.auth-header img {
+    height: 70px; /* Logo size */
+    margin-bottom: 5px;
+}
+
+/* Form fields ke beech ki gap */
+.auth-body {
+    padding: 20px;
+}
+
+.input-field-group {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.input-field-group label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Eye Icon Position Fix: Ye hamesha input ke andar rahega */
+.password-eye {
+    position: absolute;
+    right: 12px;
+    top: 36px; /* Label ke niche center mein */
+    cursor: pointer;
+    color: #888;
+    z-index: 5;
+}
+
+.btn-spic {
+    background: #007bff;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Sabhi images/logos ko dark aur contrast dene ke liye */
+img {
+    /* brightness kam karega aur contrast badhayega taaki colors dark dikhen */
+    filter: brightness(0.9) contrast(1.2) saturate(1.1);
+    
+    /* Agar logo halka sa dhundhla hai toh use sharp karne ke liye */
+    image-rendering: -webkit-optimize-contrast;
+}
+
+/* Navbar ke logo ke liye special dark effect */
+.navbar-brand img {
+    filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5)) brightness(0.85) contrast(1.3);
+}
+
+/* Login/Register patti wale logo ke liye */
+.auth-header img, .auth-header-patti img {
+    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.4)) contrast(1.2);
+    /* Isse logo par thodi gehri shadow aayegi jo use aur utha kar dikhayegi */
+}
+
+
+/* --- Modern About Page Styles --- */
+
+/* Hero Header: Parallax Effect ke liye */
+.about-hero {
+    background: linear-gradient(rgba(0, 52, 102, 0.85), rgba(0, 0, 0, 0.75)), url("/static/images/college.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Scroll karte waqt image fix rahegi */
+    padding: 80px 0;
+    color: white;
+    text-align: center;
+}
+
+/* Vision aur Mission ke Glass Cards */
+.glass-vision-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    border-left: 6px solid #007bff; /* Side mein blue patti */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.4s ease-in-out;
+    height: 100%;
+}
+
+.glass-vision-card:hover {
+    transform: translateY(-10px); /* Mouse le jane par upar uthega */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* Feature Boxes (Why Choose Us) */
+.feature-item {
+    padding: 30px;
+    border-radius: 12px;
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    transition: 0.3s;
+    height: 100%;
+}
+
+.feature-item i {
+    font-size: 2.5rem;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* Hover karne par poora box blue ho jayega */
+.feature-item:hover {
+    background: #007bff;
+    color: white;
+}
+
+.feature-item:hover i {
+    color: white;
+}
+
+/* College Image Styling */
+.modern-about-img {
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    border: 5px solid white;
+}

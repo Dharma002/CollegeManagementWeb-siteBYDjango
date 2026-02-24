@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
-# Create your models here.
+# --- Existing Models ---
+
 class Admission(models.Model):
     name = models.CharField(max_length=100)
     student_class = models.CharField(max_length=10)
@@ -12,8 +15,7 @@ class Admission(models.Model):
     
     def __str__(self):
         return self.name
-    
-    #Contact Models
+
 class Contact(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
@@ -23,19 +25,16 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
-    
-    
-    #Notice Model 
-class Notice(models.Model):
-       title = models.CharField(max_length=200)
-       description = models.TextField()
-       is_important = models.BooleanField(default=False)
-       created_at = models.DateTimeField(auto_now_add=True)
 
-       def __str__(self):
-         return self.title
-     
-     #Faculty Model
+class Notice(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    is_important = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
 class Faculty(models.Model):
     name = models.CharField(max_length=100)
     subject = models.CharField(max_length=100)
@@ -47,9 +46,7 @@ class Faculty(models.Model):
 
     def __str__(self):
         return self.name
-    
-    
-    #Gallery Model
+
 class Gallery(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='gallery/')
@@ -58,7 +55,6 @@ class Gallery(models.Model):
     def __str__(self):
         return self.title
 
-#Student Models
 class Student(models.Model):
     roll_no = models.CharField(max_length=20, unique=True)
     name = models.CharField(max_length=100)
@@ -67,8 +63,7 @@ class Student(models.Model):
 
     def __str__(self):
         return f"{self.roll_no} - {self.name}"
-    
-    #Results Models
+
 class Result(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject = models.CharField(max_length=100)
@@ -78,40 +73,35 @@ class Result(models.Model):
     def __str__(self):
         return f"{self.student.roll_no} - {self.subject}"
 
-   #Student_Profile Models
+# --- Updated StudentProfile Model ---
 
 class StudentProfile(models.Model):
-
     CLASS_CHOICES = [
-        ('6', '6'),
-        ('7', '7'),
-        ('8', '8'),
-        ('9', '9'),
-        ('10', '10'),
-        ('11', '11'),
-        ('12', '12'),
+        ('6', '6'), ('7', '7'), ('8', '8'), ('9', '9'),
+        ('10', '10'), ('11', '11'), ('12', '12'),
     ]
-
     DEPARTMENT_CHOICES = [
-        ('arts', 'Arts'),
-        ('biology', 'Biology'),
-        ('maths', 'Maths'),
-        ('agriculture', 'Agriculture'),
+        ('arts', 'Arts'), ('biology', 'Biology'),
+        ('maths', 'Maths'), ('agriculture', 'Agriculture'),
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    roll_no = models.CharField(max_length=20, unique=True)
-    student_class = models.CharField(
-        max_length=10,
-        choices=CLASS_CHOICES
-    )
-    department = models.CharField(
-        max_length=50,
-        choices=DEPARTMENT_CHOICES
-    )
+    # Signup ke waqt roll_no nahi hota, isliye null=True, blank=True rakha hai
+    roll_no = models.CharField(max_length=20, unique=True, null=True, blank=True)
+    student_class = models.CharField(max_length=10, choices=CLASS_CHOICES, null=True, blank=True)
+    department = models.CharField(max_length=50, choices=DEPARTMENT_CHOICES, null=True, blank=True)
 
     def __str__(self):
-        return self.user.username    
-    
-    
-    
+        return self.user.username
+
+# --- SIGNALS FOR AUTOMATION ---
+# Jaise hi naya User register hoga, ye signal uske liye automatically profile bana dega
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        StudentProfile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.studentprofile.save()

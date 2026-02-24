@@ -1,23 +1,127 @@
 {% extends 'base.html' %}
-{% block title %}Student Login{% endblock %}
+{% load static %}
+{% block title %}Student Login | SPIC College{% endblock %}
 
 {% block body %}
-<div class="row justify-content-center">
-  <div class="col-md-4">
-    <div class="card shadow p-4 mt-5">
-      <h3 class="fw-bold text-center mb-3">Student Login</h3>
+<style>
+    body {
+        background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url("{% static 'images/college.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
 
-      <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="username" class="form-control mb-3"
-               placeholder="Username" required>
+    .login-card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(15px);
+        border-radius: 25px;
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        overflow: hidden;
+        margin-top: 50px;
+    }
 
-        <input type="password" name="password" class="form-control mb-3"
-               placeholder="Password" required>
+    /* BLUE PATTI (HEADER) - Patli kar di hai padding kam karke */
+    .card-header-custom {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        padding: 15px 10px; /* Pehle 30px thi, ab kam kar di */
+        text-align: center;
+        color: white;
+    }
 
-        <button class="btn btn-warning w-100">Login</button>
-      </form>
+    /* LOGO - Size bada kar diya hai */
+    .login-logo {
+        height: 100px; /* Pehle 60px tha */
+        width: auto;
+        margin-bottom: 5px;
+        filter: drop-shadow(0 2px 5px rgba(0,0,0,0.2));
+    }
+
+    .form-control {
+        border-radius: 12px;
+        padding: 12px 15px;
+        border: 1px solid #e1e1e1;
+        background-color: #f8f9fa;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        background-color: #fff;
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.15);
+    }
+
+    .btn-login {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border: none;
+        color: white;
+        font-weight: 600;
+        letter-spacing: 1px;
+        padding: 14px;
+        border-radius: 12px;
+        text-transform: uppercase;
+        transition: 0.3s;
+    }
+
+    .btn-login:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+    }
+
+    .register-link {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 600;
+    }
+</style>
+
+<div class="container py-5 my-auto">
+    <div class="row justify-content-center">
+        <div class="col-md-5 col-lg-4">
+            <div class="card login-card animate__animated animate__fadeInDown">
+                <div class="card-header-custom">
+                    <img src="{% static 'images/logo.png' %}" alt="Logo" class="login-logo">
+                    <h4 class="fw-bold mb-0">Student Login</h4>
+                    <p class="mb-0 small opacity-75" style="font-size: 0.75rem;">SPIC Digital Portal</p>
+                </div>
+
+                <div class="card-body p-4">
+                    <form method="POST">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-dark small">USERNAME</label>
+                            <input type="text" name="username" class="form-control" 
+                                   placeholder="Username" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-dark small">PASSWORD</label>
+                            <input type="password" name="password" class="form-control" 
+                                   placeholder="Password" required>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-login shadow-sm">Login</button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <p class="mb-0 text-muted small">New Student? 
+                            <a href="{% url 'student_register' %}" class="register-link">Create Account</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-3 text-white-50">
+                <small>© 2026 SPIC College</small>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 {% endblock %}

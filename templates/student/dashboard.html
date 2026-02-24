@@ -1,59 +1,140 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Dashboard{% endblock %}
+{% block title %}Student Dashboard | SPIC{% endblock %}
 
 {% block body %}
+<style>
+    :root {
+        --glass-bg: rgba(255, 255, 255, 0.9);
+        --portal-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+    body { background-color: #f4f7f6; }
+
+    /* Profile Header Styling */
+    .profile-header {
+        background: linear-gradient(135deg, #007bff, #00c6ff);
+        border-radius: 20px;
+        color: white;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: var(--portal-shadow);
+    }
+    
+    .profile-img {
+        border: 5px solid rgba(255,255,255,0.3);
+        transition: transform 0.3s ease;
+    }
+    .profile-img:hover { transform: scale(1.05); }
+
+    /* Info Cards */
+    .info-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        border: none;
+        box-shadow: var(--portal-shadow);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    .info-card:hover { transform: translateY(-5px); }
+
+    .stat-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    /* Professional Badges */
+    .badge-custom {
+        padding: 8px 15px;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 0.85rem;
+    }
+</style>
+
 <div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-            <div class="card shadow-lg border-0">
-                <!-- Header with Welcome -->
-                <div class="card-header bg-primary text-white text-center py-3">
-                    <h3 class="mb-1">Welcome, {{ request.user.username }}</h3>
-                    <small class="text-light">Student Dashboard</small>
+    <div class="profile-header d-flex flex-column flex-md-row align-items-center text-center text-md-start">
+        <div class="position-relative">
+            <img src="{% static 'images/DP.jpg' %}" alt="Student" class="rounded-circle profile-img shadow-lg" width="130" height="130">
+            <span class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle p-2" title="Online"></span>
+        </div>
+        <div class="ms-md-4 mt-3 mt-md-0">
+            <h2 class="fw-bold mb-1">Namaste, {{ request.user.first_name|default:request.user.username }}!</h2>
+            <p class="mb-0 opacity-75">Student ID: #{{ profile.roll_no }} | SPIC Academic Session 2026</p>
+            <div class="mt-2">
+                <span class="badge bg-white text-primary rounded-pill px-3">Active Student</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="info-card">
+                <div class="stat-icon bg-primary text-white">
+                    <i class="bi bi-book"></i>
                 </div>
-
-                <div class="card-body text-center">
-                    <!-- Profile Photo Placeholder -->
-                    <img src="{% static 'images/DP.jpg' %}" 
-                         alt="Profile Photo" 
-                         class="rounded-circle mb-3" 
-                         width="120" height="120">
-
-                    <!-- Profile Details -->
-                    <h5 class="fw-semibold mb-3">Your Profile Details</h5>
-                    <ul class="list-group list-group-flush mb-4 text-start">
-                        <li class="list-group-item">
-                            <strong>Roll Number:</strong> {{ profile.roll_no }}
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Class:</strong> 
-                            <span class="badge bg-info text-dark">{{ profile.student_class }}</span>
-                        </li>
-                        <li class="list-group-item">
-                            <strong>Department:</strong> 
-                            {% if profile.department == 'arts' %}
-                                <span class="badge bg-warning text-dark">Arts</span>
-                            {% elif profile.department == 'biology' %}
-                                <span class="badge bg-success">Biology</span>
-                            {% elif profile.department == 'maths' %}
-                                <span class="badge bg-primary">Maths</span>
-                            {% elif profile.department == 'agriculture' %}
-                                <span class="badge bg-secondary">Agriculture</span>
-                            {% endif %}
-                        </li>
-                    </ul>
-
-                    <!-- Action Buttons -->
-                    <div class="d-flex justify-content-between">
-                        <a href="{% url 'student_result' %}" class="btn btn-success w-50 me-2">
-                            <i class="bi bi-bar-chart-line-fill"></i> View Result
-                        </a>
-                        <a href="{% url 'student_logout' %}" class="btn btn-danger w-50 ms-2">
-                            <i class="bi bi-box-arrow-right"></i> Logout
-                        </a>
-                    </div>
+                <h6 class="text-muted text-uppercase small fw-bold">Current Enrollment</h6>
+                <h4 class="fw-bold mt-2">Class {{ profile.student_class }}</h4>
+                <div class="mt-3">
+                    <p class="mb-1 small">Department:</p>
+                    {% if profile.department == 'arts' %}
+                        <span class="badge-custom bg-warning text-dark">Arts & Humanities</span>
+                    {% elif profile.department == 'biology' %}
+                        <span class="badge-custom bg-success text-white">Biology (Medical)</span>
+                    {% elif profile.department == 'maths' %}
+                        <span class="badge-custom bg-info text-dark">Mathematics (Non-Med)</span>
+                    {% elif profile.department == 'agriculture' %}
+                        <span class="badge-custom bg-secondary text-white">Agriculture Science</span>
+                    {% endif %}
                 </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="info-card">
+                <div class="stat-icon bg-success text-white">
+                    <i class="bi bi-calendar-check"></i>
+                </div>
+                <h6 class="text-muted text-uppercase small fw-bold">Attendance Rate</h6>
+                <h4 class="fw-bold mt-2">88%</h4>
+                <div class="progress mt-3" style="height: 8px; border-radius: 10px;">
+                    <div class="progress-bar bg-success" style="width: 88%"></div>
+                </div>
+                <p class="text-muted small mt-2">Keep it up! 75% mandatory.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="info-card">
+                <div class="stat-icon bg-warning text-dark">
+                    <i class="bi bi-megaphone"></i>
+                </div>
+                <h6 class="text-muted text-uppercase small fw-bold">Quick Actions</h6>
+                <div class="d-grid gap-2 mt-3">
+                    <a href="{% url 'student_result' %}" class="btn btn-outline-primary btn-sm rounded-pill text-start ps-3">
+                        <i class="bi bi-file-earmark-text me-2"></i> Download Marksheet
+                    </a>
+                    <a href="{% url 'notices' %}" class="btn btn-outline-dark btn-sm rounded-pill text-start ps-3">
+                        <i class="bi bi-info-circle me-2"></i> View Recent Notices
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mt-4">
+            <div class="d-flex justify-content-end gap-2">
+                <button class="btn btn-light shadow-sm px-4 rounded-pill border">
+                    <i class="bi bi-pencil-square me-2"></i> Edit Profile
+                </button>
+                <a href="{% url 'student_logout' %}" class="btn btn-danger px-4 rounded-pill shadow">
+                    <i class="bi bi-power me-2"></i> Logout System
+                </a>
             </div>
         </div>
     </div>

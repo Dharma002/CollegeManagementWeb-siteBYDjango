@@ -1,135 +1,269 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}S P I C College | Excellence in Education{% endblock %}
 
 {% block body %}
+<style>
+  :root {
+    --primary-color: #007bff;
+    --secondary-color: #ffc107;
+    --glass-bg: rgba(255, 255, 255, 0.95);
+  }
 
-<!-- HERO SECTION -->
-<section class="bg-dark text-white py-5">
-  <div class="container">
-    <div class="row align-items-center">
-      
-      <div class="col-md-6">
-        <h1 class="fw-bold display-5">
-          Welcome to <span class="text-warning">S P I C</span> College
-        </h1>
-        <p class="lead mt-3">
-          Quality Education for Class 6–12<br>
-          Arts • Biology • Maths • Agriculture
-        </p>
-        <a href="{% url 'admission' %}" class="btn btn-warning btn-lg mt-3">
-          Apply for Admission
-        </a>
-      </div>
+  /* Hero Section */
+  .hero-section {
+    height: 85vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .slideshow img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out, transform 6s linear;
+    transform: scale(1);
+    top: 0;
+    left: 0;
+  }
 
-      <div class="col-md-6 text-center">
-        <img src="{% static 'images/college.jpg' %}" 
-             class="img-fluid rounded shadow"
-             alt="College Image">
-      </div>
+  .slideshow img.active {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 
-    </div>
+  /* Text directly on background (No Box) */
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8); /* Depth ke liye shadow */
+  }
+
+  .hero-content h1 {
+    font-size: 4rem;
+    letter-spacing: 2px;
+  }
+
+  /* Department Cards */
+  .dept-card {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 20px !important;
+    background: #ffffff;
+    border: 1px solid #eee !important;
+  }
+
+  .dept-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1) !important;
+    border-color: var(--primary-color) !important;
+  }
+
+  .dept-card i {
+    transition: transform 0.3s ease;
+  }
+
+  .dept-card:hover i {
+    transform: scale(1.2) rotate(5deg);
+  }
+
+  /* Chatbot UI Update */
+  #chat-box-window {
+    background: var(--glass-bg) !important;
+    backdrop-filter: blur(15px);
+    border-radius: 25px !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.2) !important;
+    width: 380px !important;
+    border: none;
+  }
+
+  /* Typing Animation dots */
+  .typing-dots span { font-weight: bold; font-size: 20px; animation: blink 1s infinite; margin: 0 2px; }
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes blink { 0%, 100% { opacity: 0.2; } 50% { opacity: 1; } }
+</style>
+
+<section class="hero-section text-white">
+  <div class="slideshow">
+    <img src="{% static 'images/college.jpg' %}" class="slide active">
+    <img src="{% static 'images/college1.jpg' %}" class="slide">
+    <img src="{% static 'images/college2.jpg' %}" class="slide">
+    <img src="{% static 'images/AD.jpg' %}" class="slide">
+    <img src="{% static 'images/bio.jpg' %}" class="slide">
+    <img src="{% static 'images/DK.png' %}" class="slide">
   </div>
-</section>
 
-<!-- ABOUT SHORT -->
-<section class="py-5 bg-light">
-  <div class="container text-center">
-    <h2 class="fw-bold mb-3">About Our College</h2>
-    <p class="text-muted mx-auto" style="max-width: 800px;">
-      S P I C College is committed to providing high-quality education
-      from Class 6 to 12 with experienced faculty and modern teaching methods.
+  <div class="overlay" style="background: rgba(0,0,0,0.4); position:absolute; top:0; left:0; width:100%; height:100%; z-index: 1;"></div> 
+  
+  <div class="hero-content text-center animate__animated animate__fadeIn">
+    <h1 class="fw-bold animate__animated animate__fadeInDown">
+      Welcome to <span class="text-warning">S P I C</span> College
+    </h1>
+    <p class="h3 mt-3 fw-light animate__animated animate__fadeInUp">
+      Shaping Futures from Class 6–12
     </p>
+    <p class="mt-2 text-warning h5 animate__animated animate__fadeInUp" style="letter-spacing: 3px;">
+      ARTS • BIOLOGY • MATHS • AGRICULTURE
+    </p>
+    <a href="{% url 'admission' %}" class="btn btn-warning btn-lg mt-4 px-5 py-3 rounded-pill shadow-lg fw-bold border-0 animate__animated animate__zoomIn">
+      ADMISSION OPEN 2026
+    </a>
   </div>
 </section>
 
-<!-- DEPARTMENTS -->
-<section class="py-5">
+<section class="py-5 bg-white">
   <div class="container">
-    <h2 class="text-center fw-bold mb-4">Our Departments</h2>
-
+    <div class="text-center mb-5">
+      <h2 class="fw-bold display-6">Our Specialized Departments</h2>
+      <div style="width: 60px; height: 4px; background: var(--primary-color); margin: 15px auto; border-radius: 2px;"></div>
+    </div>
     <div class="row g-4">
-
       <div class="col-md-3">
-        <div class="card h-100 shadow text-center">
+        <div class="card h-100 shadow-sm border-0 dept-card p-4 text-center">
           <div class="card-body">
+            <div class="mb-3 text-primary h1"><i class="fas fa-palette"></i></div>
             <h5 class="fw-bold">Arts</h5>
-            <p class="text-muted">Humanities & Social Sciences</p>
+            <p class="text-muted small">Humanities & Social Sciences</p>
           </div>
         </div>
       </div>
-
       <div class="col-md-3">
-        <div class="card h-100 shadow text-center">
+        <div class="card h-100 shadow-sm border-0 dept-card p-4 text-center">
           <div class="card-body">
+            <div class="mb-3 text-success h1"><i class="fas fa-microscope"></i></div>
             <h5 class="fw-bold">Biology</h5>
-            <p class="text-muted">Life Sciences & Medical Base</p>
+            <p class="text-muted small">Medical & Life Sciences</p>
           </div>
         </div>
       </div>
-
       <div class="col-md-3">
-        <div class="card h-100 shadow text-center">
+        <div class="card h-100 shadow-sm border-0 dept-card p-4 text-center">
           <div class="card-body">
+            <div class="mb-3 text-danger h1"><i class="fas fa-calculator"></i></div>
             <h5 class="fw-bold">Maths</h5>
-            <p class="text-muted">Pure & Applied Mathematics</p>
+            <p class="text-muted small">Pure & Applied Mathematics</p>
           </div>
         </div>
       </div>
-
       <div class="col-md-3">
-        <div class="card h-100 shadow text-center">
+        <div class="card h-100 shadow-sm border-0 dept-card p-4 text-center">
           <div class="card-body">
+            <div class="mb-3 text-warning h1"><i class="fas fa-seedling"></i></div>
             <h5 class="fw-bold">Agriculture</h5>
-            <p class="text-muted">Modern Farming & Science</p>
+            <p class="text-muted small">Modern Farming Science</p>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- WHY CHOOSE US -->
-<section class="py-5 bg-light">
-  <div class="container">
-    <h2 class="text-center fw-bold mb-4">Why Choose Us?</h2>
+<div id="ai-chatbot-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">
+    <button id="chat-toggle-btn" class="btn btn-primary rounded-circle shadow-lg d-flex align-items-center justify-content-center" 
+            style="width: 70px; height: 70px; font-size: 35px; border: 3px solid #fff;">
+        🤖
+    </button>
 
-    <div class="row text-center g-4">
-
-      <div class="col-md-4">
-        <div class="p-4 bg-white shadow rounded">
-          <h5 class="fw-bold">Experienced Faculty</h5>
-          <p class="text-muted">Highly qualified and supportive teachers</p>
+    <div id="chat-box-window" class="card d-none">
+        <div class="card-header bg-primary text-white p-3 d-flex justify-content-between align-items-center" style="background: linear-gradient(135deg, #007bff, #00c6ff) !important; border:none;">
+            <div class="d-flex align-items-center">
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px; margin-right: 12px;">
+                    <span style="font-size: 24px;">🤖</span>
+                </div>
+                <div>
+                    <h6 class="mb-0 fw-bold">SPIC Assistant</h6>
+                    <small style="font-size: 11px; opacity: 0.9;">● Online & Helpful</small>
+                </div>
+            </div>
+            <button type="button" class="btn-close btn-close-white" id="chat-close-btn"></button>
         </div>
-      </div>
 
-      <div class="col-md-4">
-        <div class="p-4 bg-white shadow rounded">
-          <h5 class="fw-bold">Modern Education</h5>
-          <p class="text-muted">Updated curriculum & digital learning</p>
+        <div id="chat-display" class="card-body" style="height: 380px; overflow-y: auto; background-color: #f8f9fb; padding: 20px; scroll-behavior: smooth;">
+            <div class="mb-3 d-flex justify-content-start">
+                <div class="p-3 bg-white shadow-sm" style="border-radius: 0 15px 15px 15px; max-width: 85%;">
+                    <p class="mb-0" style="font-size: 14px; color: #444;">Namaste! Main SPIC AI hoon. Main aapki kya madad kar sakta hoon?</p>
+                </div>
+            </div>
         </div>
-      </div>
 
-      <div class="col-md-4">
-        <div class="p-4 bg-white shadow rounded">
-          <h5 class="fw-bold">Student Focus</h5>
-          <p class="text-muted">Personal attention & growth oriented</p>
+        <div class="px-3 pb-2 bg-transparent d-flex flex-wrap gap-1 justify-content-center">
+             <button class="btn btn-white btn-sm rounded-pill shadow-sm border q-btn px-3" data-msg="Admission kaise hoga?">Admission 📝</button>
+    
+             <button class="btn btn-white btn-sm rounded-pill shadow-sm border q-btn px-3" data-msg="Teachers ki list dikhao">Faculty 👨‍🏫</button>
+    
+             <button class="btn btn-white btn-sm rounded-pill shadow-sm border q-btn px-3" data-msg="Latest notice kya hai?">Notices 📢</button>
+    
+             <button class="btn btn-white btn-sm rounded-pill shadow-sm border q-btn px-3" data-msg="College ki photos dekhni hai">Gallery 🖼️</button>
+    
+             <button class="btn btn-white btn-sm rounded-pill shadow-sm border q-btn px-3" data-msg="Result kaise check karein?">Results 📊</button>
+    
+             <button class="btn btn-white btn-sm rounded-pill shadow-sm border q-btn px-3" data-msg="College se contact kaise karein?">Contact 📞</button>
         </div>
-      </div>
 
+        <div class="card-footer p-3 bg-white border-0">
+            <div class="input-group bg-light" style="border-radius: 30px; padding: 5px 15px; border: 1px solid #eee;">
+                <input type="text" id="chat-input-field" class="form-control border-0 bg-transparent shadow-none" placeholder="Poochiye kuch bhi..." style="font-size: 14px;">
+                <button class="btn text-primary shadow-none p-0" id="chat-send-btn" style="font-size: 22px;">➤</button>
+            </div>
+        </div>
     </div>
-  </div>
-</section>
+</div>
 
-<!-- CALL TO ACTION -->
-<section class="bg-primary text-white text-center py-5">
-  <h2 class="fw-bold">Admissions Open for 2026</h2>
-  <p class="lead">Give your child the best future</p>
-  <a href="{% url 'admission' %}" class="btn btn-light btn-lg mt-2">
-    Apply Now
-  </a>
-</section>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // Slideshow
+    const slides = document.querySelectorAll(".slide");
+    let current = 0;
+    setInterval(() => {
+        slides[current].classList.remove("active");
+        current = (current + 1) % slides.length;
+        slides[current].classList.add("active");
+    }, 5000);
 
+    // Chat Logic
+    const btn = document.getElementById('chat-toggle-btn');
+    const windowBox = document.getElementById('chat-box-window');
+    const closeBtn = document.getElementById('chat-close-btn');
+    const sendBtn = document.getElementById('chat-send-btn');
+    const inputField = document.getElementById('chat-input-field');
+    const chatDisplay = document.getElementById('chat-display');
+
+    btn.onclick = () => windowBox.classList.toggle('d-none');
+    closeBtn.onclick = () => windowBox.classList.add('d-none');
+
+    async function sendMessage(manualText = null) {
+        const text = manualText || inputField.value.trim();
+        if (!text) return;
+
+        chatDisplay.innerHTML += `<div class="mb-3 d-flex justify-content-end"><div class="p-3 bg-primary text-white shadow-sm" style="border-radius: 15px 15px 0 15px; max-width: 85%; font-size: 14px;">${text}</div></div>`;
+        inputField.value = '';
+        chatDisplay.scrollTop = chatDisplay.scrollHeight;
+
+        const typingId = 'typing-' + Date.now();
+        chatDisplay.innerHTML += `<div id="${typingId}" class="mb-3 d-flex justify-content-start"><div class="p-2 bg-white shadow-sm" style="border-radius: 0 15px 15px 15px;"><div class="typing-dots"><span>.</span><span>.</span><span>.</span></div></div></div>`;
+        chatDisplay.scrollTop = chatDisplay.scrollHeight;
+
+        try {
+            const response = await fetch('/ai-assistant/?msg=' + encodeURIComponent(text));
+            const data = await response.json();
+            document.getElementById(typingId).remove();
+
+            chatDisplay.innerHTML += `<div class="mb-3 d-flex justify-content-start"><div class="p-3 bg-white shadow-sm" style="border-radius: 0 15px 15px 15px; max-width: 85%; color: #333; font-size: 14px; border-left: 4px solid #007bff;">${data.reply}</div></div>`;
+            chatDisplay.scrollTop = chatDisplay.scrollHeight;
+        } catch (e) {
+            if(document.getElementById(typingId)) document.getElementById(typingId).remove();
+        }
+    }
+
+    sendBtn.onclick = () => sendMessage();
+    inputField.onkeypress = (e) => { if(e.key === 'Enter') sendMessage(); };
+    document.querySelectorAll('.q-btn').forEach(b => b.onclick = () => sendMessage(b.dataset.msg));
+});
+</script>
 {% endblock %}
